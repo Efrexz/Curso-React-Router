@@ -1,13 +1,18 @@
-import { useAuth } from "./auth";
+import { useAuth, ProtectedRoutes } from "./auth";
 
 function ProfilePage () {
-    const auth = useAuth();
-    return(
-        <>
-            <h1>ProfilePage</h1>
 
-            <h3>Welcome, {auth.user}</h3>
-        </>
+    const auth = useAuth();
+
+    // if(!auth.user){
+    //     return <Navigate to={"/login"}/>
+    // } Esta forma es en caso de hacerlo manualmente sin crear un componente que lo haga
+    return(
+        <ProtectedRoutes>
+            <h1>ProfilePage</h1>
+            <h2>Welcome, {auth.user}</h2>
+        </ProtectedRoutes>
+
     )
 }
 

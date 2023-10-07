@@ -1,4 +1,4 @@
-import { useAuth } from "./auth";
+import { useAuth , ProtectedRoutes} from "./auth";
 
 function LogoutPage(){
 
@@ -9,7 +9,7 @@ function LogoutPage(){
         auth.logout();
     }
     return (
-        <>
+        <ProtectedRoutes>
             <h2>Logout</h2>
 
             <form onSubmit={logoutAction}>
@@ -17,7 +17,7 @@ function LogoutPage(){
                 <button type="submit">Salir</button>
             </form>
 
-        </>
+        </ProtectedRoutes>
     )
 }
 

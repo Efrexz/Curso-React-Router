@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -33,7 +33,17 @@ function useAuth(){
     return auth;
 }
 
+//funcion para que si intentan ingresar por url a una ruta privada y no esten registrados se redireccione al login
+function ProtectedRoutes(props){
+    const auth = useAuth();
+    if(!auth.user){//si el usuario no esta registrado e intenta ingresar alguna ruta que sea privada en la cual llamemos al componente como profile o logout se redirecciona a login
+        return <Navigate to={"/login"}/>
+    }
+    return(props.children)
+}
+
 export {
     AuthProvider,
     useAuth,
+    ProtectedRoutes,
     };
