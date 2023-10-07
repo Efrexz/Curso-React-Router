@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link , Outlet} from "react-router-dom";
 import { blogsData } from "./blogsData.jsx";
 
 function BlogPage () {
@@ -13,7 +13,8 @@ function BlogPage () {
 
     return(
         <>
-            <h1>BlogPage</h1>
+            <h1>Blog</h1>
+            <Outlet/>
             <ul>
                 {blogsData.map((blog) => (
                     <li key={blog.slug}>
