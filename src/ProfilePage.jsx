@@ -10,7 +10,7 @@ function ProfilePage () {
     return(
         <ProtectedRoutes>
             <h1>ProfilePage</h1>
-            <h2>Welcome, {auth.user}</h2>
+            <h2>Welcome, {auth.user?.userName}</h2>
         </ProtectedRoutes>
 
     )

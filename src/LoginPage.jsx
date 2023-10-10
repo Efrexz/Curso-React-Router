@@ -6,12 +6,13 @@ function LoginPage(){
 
     const auth = useAuth();
 
+
+    const [userName, setUserName] = useState("");
+
     const loginAction = (e) =>{
         e.preventDefault();
         auth.login(userName)
     };
-
-    const [userName, setUserName] = useState("");
 
     //si intenta ingresar a login por url un usuario que ya este registrado se redirecciona al perfil
     if(auth.user) return <Navigate to={"/profile"} />
