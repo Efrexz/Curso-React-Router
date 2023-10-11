@@ -1,15 +1,25 @@
 import { useState } from "react";
 import { useAuth } from "../auth";
+import { blogsData } from "../blogsData";
 import "./NewBlogForm.css";
 
 
 function NewBlogForm() {
     const auth = useAuth();
 
-    const [newBlogValue, setNewBlogValue] = useState("");
+    const [newBlogTitle, setNewBlogTitle] = useState("");
+    const [newBlogDescription, setNewBlogDescription] = useState("");
 
     const onSubmit = (event) => {
         event.preventDefault();
+        //creamos un nuevo objeto con la informacion del nuevo blog para luego enviarla a la data de blogs y renderizar
+        const newBlogInfo = {
+            title: newBlogTitle,
+            author: auth.user.userName,
+            content: newBlogDescription,
+            slug: newBlogTitle,
+        };
+        blogsData.push(newBlogInfo);
         auth.setNewBlogForm(false);
     };
 
@@ -17,8 +27,12 @@ function NewBlogForm() {
         auth.setNewBlogForm(false);
     };
 
-    const onChange = (event) => {
-        setNewBlogValue(event.target.value);
+    const onChangeTitle = (event) => {
+        setNewBlogTitle(event.target.value);
+    };
+
+    const onChangeDescription = (event) => {
+        setNewBlogDescription(event.target.value);
     };
 
 
@@ -27,8 +41,15 @@ function NewBlogForm() {
         <label>Ingresa el titulo de tu blog</label>
         <textarea
             placeholder="React Forever"
-            onChange={onChange}
-            value={newBlogValue}//para que sea obligatorio agregar cualquier caracter y no enviarlo vacio
+            onChange={onChangeTitle}
+            value={newBlogTitle}
+        />
+
+        <label>Ingresa descripcion de tu blog</label>
+        <textarea
+            placeholder="React es lo maximo si o que xD"
+            onChange={onChangeDescription}
+            value={newBlogDescription}
         />
 
         <div className="TodoForm-buttonContainer">
