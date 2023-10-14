@@ -3,8 +3,10 @@ import { useAuth } from "../auth";
 import { blogsData } from "../blogsData";
 import { useModals } from "../ModalProvider.jsx";
 import "./NewBlogForm.css";
+import { useNavigate } from "react-router-dom";
 
 function NewBlogForm() {
+    const navigate = useNavigate();
     const auth = useAuth();
     const modal = useModals();
 
@@ -22,6 +24,7 @@ function NewBlogForm() {
         };
         blogsData.push(newBlogInfo);
         modal.setNewBlogForm(false);
+        navigate("/blog")
     };
 
     const onCancel = () => {

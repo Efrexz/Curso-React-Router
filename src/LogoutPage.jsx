@@ -17,7 +17,6 @@ function LogoutPage(){
                 <label>¿Seguro que desea salir?</label>
                 <button type="submit">Salir</button>
             </form>
-
         </ProtectedRoutes>
     )
 }

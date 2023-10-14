@@ -11,12 +11,16 @@ function BlogPost() {
     const auth = useAuth();
     const modal = useModals();
     const newSlug = useLocation();//vemos nuestra url que nos devulve un objeto para luego acceder al pathname que contiene el valor de neustra url. Esto sera necesario al momento de ejecutar el .find de nuestro blogPost y cuando editemos el valor nos redirija en la misma pagina que estamos
+    console.log(newSlug);
 
     const params = useParams();
     const navigate = useNavigate();
 
     //buscamos la informacion del blog de acuerdo a su url slug
     const blogPost = blogsData.find(post => post.slug === params.slug);
+
+    //en caso que no exista este blog nos redirecciona para que no truene la app
+    if(!blogPost){ return navigate("/g")}
 
     //vemos si el usuario ingresado es admin o dueño de alguno de los blogs para que pueda acceder al boton de eliminar
     const canDeleteAndEdit = auth.user?.isAdmin || blogPost.author === auth.user?.userName;

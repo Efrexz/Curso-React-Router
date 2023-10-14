@@ -26,7 +26,7 @@ function App() {
               <Route path='/profile' element={<ProfilePage/>}/>
               <Route path='/login' element={<LoginPage/>}/>
               <Route path='/logout' element={<LogoutPage/>}/>
-              <Route path='/*' element={<p>Not found</p>}/>
+              <Route path='/*' element={<h1>Not found</h1>}/>
             </Routes>
           </ModalProvider>
         </AuthProvider>
