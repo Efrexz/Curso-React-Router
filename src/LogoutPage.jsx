@@ -1,4 +1,5 @@
-import { useAuth , ProtectedRoutes} from "./auth";
+import { useAuth} from "./auth";
+import { ProtectedRoutes } from "./ProtectedRoutes";
 
 function LogoutPage(){
 

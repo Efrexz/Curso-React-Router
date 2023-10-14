@@ -8,6 +8,7 @@ import { useAuth } from "./auth.jsx";
 function BlogPost() {
     const auth = useAuth();
     const params = useParams();
+    console.log(params);
     const navigate = useNavigate();
 
     //buscamos la informacion del blog de acuerdo a su url slug
@@ -19,6 +20,12 @@ function BlogPost() {
     //funcion a ejecutar al hacer click en boton de regresar a blogs
     function returnToBlogs(){
         navigate("/blog")
+    }
+
+    function editBlog(){
+        if(!auth.user){
+            navigate("/login")
+        }
     }
 
     function confirmDeletion(){
@@ -37,12 +44,16 @@ function BlogPost() {
             <button onClick={returnToBlogs}>Volver a los blogs</button>
             <p>{blogPost.author}</p>
             <p>{blogPost.content}</p>
+            <button
+                onClick={editBlog}>
+                    Editar blogPost
+            </button>
 
             {/*Si es admin o author se genera el boton de eliminar blog */}
             {(canDelete) && (
                 <button onClick={deleteBlog}>Eliminar BlogPost</button>
-            )
-            }
+            )}
+
 
             {auth.deleteConfirmation && (
                 <Modal>
