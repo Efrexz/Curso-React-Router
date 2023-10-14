@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useAuth } from "../auth";
-import { blogsData } from "../blogsData";
 import { useModals } from "../ModalProvider.jsx";
-import "./NewBlogForm.css";
 
-function NewBlogForm() {
+function EditForm(props) {
     const auth = useAuth();
     const modal = useModals();
+    const slug = props.newSlug.split("/")[2];//recibimos el string de nuestra url actual y la convertimos en string y luego accedemos a la posicion que contiene nuestro slug
+
 
     const [newBlogTitle, setNewBlogTitle] = useState("");
     const [newBlogDescription, setNewBlogDescription] = useState("");
@@ -18,14 +18,14 @@ function NewBlogForm() {
             title: newBlogTitle,
             author: auth.user.userName,
             content: newBlogDescription,
-            slug: newBlogTitle,
+            slug,//le enviamos el valor del nuevo slug para que nos redirija correctamente
         };
-        blogsData.push(newBlogInfo);
-        modal.setNewBlogForm(false);
+        props.confirmEditForm(newBlogInfo)
+        modal.setEditForm(false);
     };
 
     const onCancel = () => {
-        modal.setNewBlogForm(false);
+        modal.setEditForm(false);
     };
 
     const onChangeTitle = (event) => {
@@ -39,14 +39,14 @@ function NewBlogForm() {
 
     return (
         <form onSubmit={onSubmit}>
-        <label>Ingresa el titulo de tu blog</label>
+        <label>Ingresa el nuevo titulo de tu blog</label>
         <textarea
             placeholder="React Forever"
             onChange={onChangeTitle}
             value={newBlogTitle}
         />
 
-        <label>Ingresa descripcion de tu blog</label>
+        <label>Ingresa la nueva descripcion de tu blog</label>
         <textarea
             placeholder="React es lo maximo si o que xD"
             onChange={onChangeDescription}
@@ -69,4 +69,4 @@ function NewBlogForm() {
         </form>
     );
 }
-export { NewBlogForm };
+export { EditForm };

@@ -2,14 +2,16 @@ import { Link , Outlet} from "react-router-dom";
 import { blogsData } from "./blogsData.jsx";
 import { Modal } from "./Modal/Modal.jsx";
 import { NewBlogForm } from "./NewBlogForm/NewBlogForm.jsx";
+import { useModals } from "./ModalProvider.jsx";
 import { useAuth } from "./auth.jsx";
 
 
 function BlogPage () {
     const auth = useAuth();
+    const modal = useModals();
 
     function openFormNewBlog(){
-        auth.setNewBlogForm(true)
+        modal.setNewBlogForm(true)
     }
 
     function BlogLink ({blog}){
@@ -32,7 +34,7 @@ function BlogPage () {
                 ))}
             </ul>
 
-            {auth.newBlogForm && <Modal><NewBlogForm>Agregar Blog</NewBlogForm></Modal>}
+            {modal.newBlogForm && <Modal><NewBlogForm>Agregar Blog</NewBlogForm></Modal>}
             {auth.user && (
                 <button
                     onClick={openFormNewBlog}>

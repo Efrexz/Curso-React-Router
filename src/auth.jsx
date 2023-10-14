@@ -9,8 +9,6 @@ function AuthProvider({children}){
     const navigate = useNavigate();
 
     const [ user , setUser] = useState(null);
-    const [ newBlogForm, setNewBlogForm] = useState(false);
-    const [ deleteConfirmation , setDeleteConfirmation] = useState(false);
 
     function login(userName){
         const isAdmin = adminList.find(admin => admin === userName);
@@ -28,10 +26,6 @@ function AuthProvider({children}){
             user,
             login,
             logout,
-            newBlogForm,
-            setNewBlogForm,
-            deleteConfirmation,
-            setDeleteConfirmation
             }}>
             {children}
         </AuthContext.Provider>

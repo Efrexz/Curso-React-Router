@@ -1,16 +1,16 @@
-import { useAuth } from "../auth";
+import { useModals } from "../ModalProvider";
 
 function DeleteConfirmation(props) {
-    const auth = useAuth();
+    const modal = useModals();
 
     const onSubmit = (event) => {
         event.preventDefault();
         props.confirmDeletion()//recibimos por parametro la funcion desde BlogPost.jsx y la ejecutamos al aceptar eliminar el blog
-        auth.setDeleteConfirmation(false);
+        modal.setDeleteConfirmation(false);
     };
 
     const onCancel = () => {
-        auth.setDeleteConfirmation(false);
+        modal.setDeleteConfirmation(false);
     };
 
 
